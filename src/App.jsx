@@ -1,6 +1,6 @@
 import Polyhedron from './Polyhedron'
 import * as THREE from 'three'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useLoader } from '@react-three/fiber'
 import { Stats, OrbitControls } from '@react-three/drei'
 import { useControls } from 'leva'
 import Floor from './Floor'
@@ -79,24 +79,28 @@ function Lights() {
   )
 }
 export default function App() {
+  const texture = useLoader(THREE.TextureLoader, './img/grid.png')
+
   return (
     <Canvas camera={{ position: [4, 4, 1.5] }} shadows>
       <Lights />
       <Polyhedron
         name="meshBasicMaterial"
         position={[-3, 1, 0]}
-        material={new THREE.MeshBasicMaterial({ color: 'yellow' })}
+        material={new THREE.MeshBasicMaterial({ map: texture })}
       />
       <Polyhedron
         name="meshNormalMaterial"
         position={[-1, 1, 0]}
-        material={new THREE.MeshNormalMaterial({ flatShading: true })}
+        material={new THREE.MeshNormalMaterial({ flatShading: true,map: texture,
+        })}
       />
       <Polyhedron
         name="meshPhongMaterial"
         position={[1, 1, 0]}
         material={
-          new THREE.MeshPhongMaterial({ color: 'lime', flatShading: true })
+          new THREE.MeshPhongMaterial({ color: 'lime', flatShading: true,            map: texture,
+        })
         }
       />
       <Polyhedron
@@ -106,6 +110,8 @@ export default function App() {
           new THREE.MeshStandardMaterial({
             color: 0xff0033,
             flatShading: true,
+            map: texture,
+
           })
         }
       />
