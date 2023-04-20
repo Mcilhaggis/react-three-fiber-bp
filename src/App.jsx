@@ -24,7 +24,8 @@ function Model({ url }) {
           <Html
             key={o.uuid}
             position={[o.position.x, o.position.y, o.position.z]}
-            // transform
+            // Having this set to true will fix the labels into palce and not rotate with the personal view
+            transform
             distanceFactor={0.25}
             // occlude would hide any of the values that we placed inside of the mesh
             // occlude
